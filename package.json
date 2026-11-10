@@ -1,0 +1,6 @@
+{
+  "name": "trc-sl-portal",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
