@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="si" w-tid="1">
+<head w-tid="3">
+
+
+<link rel="stylesheet" href="https://api.websim.com/fonts.css?v=f48d82f17121bfa634561a27a80f3abccf38a50c">
+<style class="websim-injected websim-ios-mobile-fix">
+/* iOS zoom prevention and overscroll behavior - injected by WebSim */
+html, body {
+  touch-action: pan-x pan-y;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+input, textarea, select {
+  font-size: max(1rem, 16px) !important;
+}
+</style>
+<script class="websim-injected">__WEBSIM_DATA__={"home":false,"hostOrigin":"https://websim.com","apiOrigin":"https://api.websim.com","isTopLevelFrame":false,"project_id":"dob7uc0jgfk7lzwvz68c","preview":true,"activityCaptureMode":"on","route":{"type":"project","id":"dob7uc0jgfk7lzwvz68c"},"baseUrl":"https://websim.com/p/dob7uc0jgfk7lzwvz68c"}</script>
+<script class="websim-injected" src="https://api.websim.com/dist/index.js?v=f48d82f17121bfa634561a27a80f3abccf38a50c"></script>
+<meta charset="UTF-8" w-tid="5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" w-tid="7"/>
+<title w-tid="9">TRC-SL Data Portal</title>
+<style w-tid="11">
+  :root{
+    --bg:#0b1220; --card:#121c30; --card2:#182440; --line:#24365c;
+    --blue:#2f7df6; --green:#22c55e; --txt:#e8eefc; --muted:#93a4c8;
+    --gold:#f5b301;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:"Noto Sans Sinhala","Iskoola Pota","Sarala",system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #1a2c55 0%, var(--bg) 60%);
+    color:var(--txt); min-height:100vh; padding:14px 14px 40px;
+  }
+  .wrap{max-width:480px; margin:0 auto;}
+
+  /* ===== Header ===== */
+  .gov-strip{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .emblem{
+    width:46px; height:46px; border-radius:12px; flex:none;
+    background:linear-gradient(135deg,#0e3a8a,#2563eb); display:flex; align-items:center; justify-content:center;
+    font-size:24px; box-shadow:0 0 18px rgba(47,125,246,.55), inset 0 0 0 1px rgba(255,255,255,.15);
+  }
+  .titles{flex:1; min-width:0;}
+  .titles h1{font-size:15px; font-weight:800; line-height:1.25; letter-spacing:.2px;}
+  .titles p{font-size:10.5px; color:var(--muted); letter-spacing:.6px;}
+  .verified{
+    flex:none; display:inline-flex; align-items:center; gap:4px;
+    background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.45);
+    color:#5ee69a; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px;
+    box-shadow:0 0 14px rgba(34,197,94,.25);
+  }
+  .live-row{
+    display:flex; gap:8px; margin-bottom:14px;
+  }
+  .pill{
+    flex:1; background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:8px 10px; text-align:center; font-size:11px; color:var(--muted);
+  }
+  .pill b{display:block; font-size:15px; color:var(--txt); margin-top:2px; letter-spacing:.5px;}
+  .pill .dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 8px var(--green); margin-right:4px; animation:blink 1.6s infinite;}
+  .pill b.warn{color:#ff8f6b;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* ===== Cards ===== */
+  .card{
+    background:linear-gradient(180deg, var(--card2), var(--card));
+    border:1px solid var(--line); border-radius:16px; padding:18px 16px; margin-bottom:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .offer-head{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .offer-ic{
+    width:52px; height:52px; border-radius:14px; flex:none; font-size:26px;
+    background:linear-gradient(135deg,#f59e0b,#f97316); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 20px rgba(245,179,1,.4);
+  }
+  .offer-head h2{font-size:17px; font-weight:800;}
+  .offer-head p{font-size:11.5px; color:var(--muted);}
+  .tag{
+    display:inline-block; margin-top:4px; font-size:10px; font-weight:700; color:#ffd27a;
+    background:rgba(245,179,1,.12); border:1px solid rgba(245,179,1,.4);
+    padding:2px 8px; border-radius:999px;
+  }
+
+  label{display:block; font-size:12.5px; font-weight:600; margin:14px 0 6px; color:#c6d4f2;}
+  .phone-row{display:flex; gap:8px;}
+  .cc{
+    flex:none; display:flex; align-items:center; justify-content:center;
+    width:78px; background:#0e1830; border:1px solid var(--line); border-radius:10px;
+    font-weight:700; font-size:14px; color:#9fc0ff;
+  }
+  input[type=tel], select{
+    width:100%; background:#0e1830; border:1px solid var(--line); border-radius:10px;
+    padding:13px 12px; color:var(--txt); font-size:15px; outline:none; font-family:inherit;
+    appearance:none; -webkit-appearance:none;
+  }
+  input:focus, select:focus{border-color:var(--blue); box-shadow:0 0 0 3px rgba(47,125,246,.25);}
+  .sel-wrap{position:relative;}
+  .sel-wrap::after{
+    content:"▾"; position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    color:var(--muted); pointer-events:none;
+  }
+  select{padding-right:32px;}
+
+  .chips{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px;}
+  .chip{
+    background:#0e1830; border:1px solid var(--line); border-radius:12px;
+    padding:11px 10px; text-align:center; font-size:12px; font-weight:600; color:#c6d4f2;
+    cursor:pointer; transition:all .15s; line-height:1.35;
+  }
+  .chip.active{
+    background:rgba(47,125,246,.16); border-color:var(--blue); color:#fff;
+    box-shadow:0 0 14px rgba(47,125,246,.35);
+  }
+  .chip .big{display:block; font-size:14px; font-weight:800; color:#fff; margin-bottom:2px;}
+
+  .btn{
+    width:100%; border:none; border-radius:12px; padding:15px; font-size:15.5px; font-weight:800;
+    font-family:inherit; cursor:pointer; margin-top:18px; transition:transform .1s, opacity .2s;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn-primary{
+    background:linear-gradient(135deg,#2f7df6,#1d4ed8); color:#fff;
+    box-shadow:0 6px 20px rgba(47,125,246,.45);
+  }
+  .btn-wa{
+    background:linear-gradient(135deg,#25d366,#128c4b); color:#fff;
+    box-shadow:0 6px 20px rgba(37,211,102,.4); margin-top:12px;
+  }
+  .btn-final{
+    background:linear-gradient(135deg,#f5b301,#f97316); color:#1a1000;
+    box-shadow:0 6px 20px rgba(245,179,1,.4);
+  }
+  .btn:disabled{opacity:.4; cursor:not-allowed; box-shadow:none; transform:none;}
+
+  .secure-note{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size:10.5px; color:var(--muted); margin-top:12px;
+  }
+
+  /* ===== Loading ===== */
+  #phase2{display:none; text-align:center; padding:34px 18px;}
+  .spinner{
+    width:64px; height:64px; margin:0 auto 22px; border-radius:50%;
+    border:4px solid var(--line); border-top-color:var(--blue);
+    animation:spin .9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #loadText{font-size:15px; font-weight:700; min-height:24px;}
+  .sub{font-size:12px; color:var(--muted); margin-top:6px;}
+  .load-bar{height:8px; background:#0e1830; border-radius:99px; margin-top:22px; overflow:hidden;}
+  .load-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--blue),#7cb0ff); border-radius:99px; transition:width .6s;}
+
+  /* ===== Share phase ===== */
+  #phase3{display:none;}
+  .wa-head{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .wa-ic{
+    width:52px; height:52px; border-radius:14px; flex:none; font-size:26px;
+    background:linear-gradient(135deg,#25d366,#0f7a3d); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 20px rgba(37,211,102,.4);
+  }
+  .wa-head h2{font-size:16px; font-weight:800;}
+  .wa-head p{font-size:11.5px; color:var(--muted); line-height:1.4;}
+  .prog-bar{height:14px; background:#0e1830; border-radius:99px; overflow:hidden; margin:16px 0 8px; border:1px solid var(--line);}
+  .prog-fill{
+    height:100%; width:0%; border-radius:99px; transition:width .5s cubic-bezier(.2,.9,.3,1.2);
+    background:linear-gradient(90deg,#25d366,#86efac);
+  }
+  .prog-num{font-size:13px; font-weight:800; text-align:right; color:#86efac;}
+  .hint{font-size:11.5px; color:var(--muted); text-align:center; margin-top:10px; line-height:1.5;}
+
+  /* ===== Modal ===== */
+  #modalWrap{
+    display:none; position:fixed; inset:0; z-index:50;
+    background:rgba(4,8,18,.88); backdrop-filter:blur(6px);
+    align-items:center; justify-content:center; padding:20px;
+  }
+  #modalWrap.show{display:flex;}
+  .modal{
+    background:linear-gradient(180deg,#1c2a4d,#121c30);
+    border:1px solid #33518f; border-radius:20px; padding:26px 20px;
+    max-width:400px; width:100%; text-align:center;
+    box-shadow:0 0 60px rgba(47,125,246,.35);
+    animation:pop .35s cubic-bezier(.2,1.4,.4,1);
+    max-height:88vh; overflow-y:auto;
+  }
+  @keyframes pop{from{transform:scale(.7); opacity:0} to{transform:scale(1); opacity:1}}
+  .meme{font-size:64px; animation:laugh 1s infinite;}
+  @keyframes laugh{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) scale(1.08)}}
+  .modal h2{font-size:20px; font-weight:800; margin:12px 0 14px; color:#ffd27a;}
+  .modal p{font-size:13.5px; line-height:1.85; color:#d7e2f7; text-align:left; margin-bottom:10px;}
+  .modal .safe{
+    margin-top:14px; font-size:11px; color:var(--muted); background:rgba(34,197,94,.08);
+    border:1px solid rgba(34,197,94,.3); border-radius:10px; padding:9px 10px; text-align:left; line-height:1.6;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    text-align:center; font-size:10.5px; color:#6d7fa3; line-height:1.7; margin-top:20px;
+    border-top:1px solid var(--line); padding-top:14px;
+  }
+  footer b{color:#93a4c8;}
+  .modal p b{color:#ffd27a;}
+
+  /* ===== Confetti ===== */
+  .confetti{position:fixed; top:-20px; width:10px; height:14px; z-index:60; pointer-events:none; opacity:.95;}
+  @keyframes fall{
+    to{transform:translateY(110vh) rotate(720deg); opacity:.2;}
+  }
+  .hidden{display:none !important;}
+</style>
+</head>
+<body w-tid="13">
+<div class="wrap" w-tid="15">
+
+  <!-- Header -->
+  <div class="gov-strip" w-tid="17">
+    <div class="emblem" w-tid="19">🇱🇰</div>
+    <div class="titles" w-tid="21">
+      <h1 w-tid="23">TRC-SL National Data Portal</h1>
+      <p w-tid="25">ශ්‍රී ලංකා ජංගම දුරකථන සම්මාන ඒකකය</p>
+    </div>
+    <span class="verified" w-tid="27">✓ Verified</span>
+  </div>
+
+  <div class="live-row" w-tid="29">
+    <div class="pill" w-tid="31"><span class="dot" w-tid="33"></span>දැන් Online<b id="onlineCount" w-tid="35">1,420</b></div>
+    <div class="pill" w-tid="37">කාලය ඉකුත් වෙමින්<b class="warn" id="countdown" w-tid="39">04:59</b></div>
+  </div>
+
+  <!-- Phase 1: Form -->
+  <div id="phase1" w-tid="41">
+    <div class="card" w-tid="43">
+      <div class="offer-head" w-tid="45">
+        <div class="offer-ic" w-tid="47">🎁</div>
+        <div w-tid="49">
+          <h2 w-tid="51">නොමිලේ ඩේටා ලබාගන්න</h2>
+          <p w-tid="53">ජාතික දිනුම — සීමාවාරික ඉදිරිපත් කිරීම</p>
+          <span class="tag" w-tid="55">✦ අද පමණයි · 100% FREE</span>
+        </div>
+      </div>
+
+      <label for="phone" w-tid="57">ඔබගේ දුරකථන අංකය</label>
+      <div class="phone-row" w-tid="59">
+        <div class="cc" w-tid="61">+94</div>
+        <input type="tel" id="phone" inputmode="numeric" maxlength="9" placeholder="7X XXX XXXX" autocomplete="off" w-tid="63"/>
+      </div>
+
+      <label for="network" w-tid="65">ඔබගේ සමාගම තෝරන්න</label>
+      <div class="sel-wrap" w-tid="67">
+        <select id="network" w-tid="69">
+          <option value selected disabled w-tid="71">සමාගමක් තෝරන්න...</option>
+          <option w-tid="73">Dialog</option>
+          <option w-tid="75">Mobitel</option>
+          <option w-tid="77">Hutch</option>
+          <option w-tid="79">Airtel</option>
+        </select>
+      </div>
+
+      <label w-tid="81">ඔබට අවශ්‍ය Package එක තෝරන්න</label>
+      <div class="chips" id="chips" w-tid="83">
+        <div class="chip active" data-pkg="40GB Anytime Data (30 Days)" w-tid="85"><span class="big" w-tid="87">40GB</span>Anytime Data (30 දින)</div>
+        <div class="chip" data-pkg="Unlimited Social Media" w-tid="89"><span class="big" w-tid="91">∞</span>Unlimited Social Media</div>
+        <div class="chip" data-pkg="100GB Night Time Data" style="grid-column:span 2" w-tid="93"><span class="big" w-tid="95">100GB</span>Night Time Data (රාත්‍රී 12 උදෑසන 8)</div>
+      </div>
+
+      <button class="btn btn-primary" id="activateBtn" w-tid="97">ඉදිරියට යන්න · Activate Offer</button>
+      <div class="secure-note" w-tid="99">🔒 SSL ආරක්ෂිත සම්බන්ධතාවය · රජයේ අනුමත දිනුම</div>
+    </div>
+  </div>
+
+  <!-- Phase 2: Loading -->
+  <div class="card" id="phase2" w-tid="101">
+    <div class="spinner" w-tid="103"></div>
+    <div id="loadText" w-tid="105">Connecting to Telecom Gateway...</div>
+    <div class="sub" w-tid="107">කරුණාකර මෙම කවුළුව වසා නොදමන්න...</div>
+    <div class="load-bar" w-tid="109"><div class="load-fill" id="loadFill" w-tid="111"></div></div>
+  </div>
+
+  <!-- Phase 3: WhatsApp share -->
+  <div id="phase3" w-tid="113">
+    <div class="card" w-tid="115">
+      <div class="wa-head" w-tid="117">
+        <div class="wa-ic" w-tid="119">💬</div>
+        <div w-tid="121">
+          <h2 w-tid="123">තහවුරු කිරීමේ අවසන් පියවර</h2>
+          <p w-tid="125">ඉල්ලුම ඉහළ නිසා, ඔබේ 40GB ලබාගැනීමට පෙර යාලුවන් 5 දෙනෙකුට මෙය Share කරන්න.</p>
+        </div>
+      </div>
+
+      <div class="prog-bar" w-tid="127"><div class="prog-fill" id="progFill" w-tid="129"></div></div>
+      <div class="prog-num" id="progNum" w-tid="131">0%</div>
+
+      <button class="btn btn-wa" id="shareBtn" w-tid="133">WhatsApp හරහා යාලුවන් 5 දෙනෙකුට Share කරන්න</button>
+      <button class="btn btn-final" id="finalBtn" disabled w-tid="135">දැන් 40GB ලබාගන්න</button>
+
+      <div class="hint" w-tid="137">⚠ සෑම Share එකක්ම ඔබේ සහතිකය වෙත 20% ක් එකතු කරයි</div>
+    </div>
+  </div>
+
+  <footer w-tid="139">
+    <b w-tid="141">TRC-SL National Data Portal</b><br w-tid="143"/>
+    © 2025 Telecommunication Regulatory Commission of Sri Lanka<br w-tid="145"/>
+    රජයේ අනුමත ජාතික දිනුම් වැඩසටහන
+  </footer>
+</div>
+
+<!-- Prank Modal -->
+<div id="modalWrap" w-tid="147">
+  <div class="modal" w-tid="149">
+    <div class="meme" w-tid="151">🤣</div>
+    <h2 w-tid="153">අඩෝ උඹ අහුවුණා! 🤣</h2>
+    <p w-tid="155">මේක ඔබේ මිතුරන් විසින් ආතල් එකට සහ දැනුවත්භාවය වෙනුවෙන් නිර්මාණය කරන ලද ප්‍රෑන්ක් වෙබ් අඩවියකි. කිසිදු දුරකථන සමාගමකින් මෙහෙම නිකන් ඩේටා ලබා දෙන්නේ නැත.</p>
+    <p w-tid="157">🔒 <b w-tid="159">ආරක්ෂක සටහන:</b> ඔබ විසින් ඇතුළත් කළ දුරකථන අංකය හෝ කිසිදු පෞද්ගලික දත්තයක් අප විසින් කිසිදු සර්වර් එකක ගබඩා කර හෝ රැස් කර නොමැත. ඔබේ පෞද්ගලිකත්වය 100% ක් සුරක්ෂිතයි.</p>
+    <p w-tid="161">මෙය පාඩමකට අරන් අනාගතයේදී නොදන්නා ලින්ක්ස් වලට රැවටීමෙන් තොරව සයිබර් ආරක්ෂාව පිළිබඳව සැලකිලිමත් වන්න!</p>
+    <button class="btn btn-primary" id="sharePrankBtn" w-tid="163">තව කෙනෙක්ව ප්‍රෑන්ක් කරන්න (Share)</button>
+  </div>
+</div>
+
+<script w-tid="165">
+(function(){
+  "use strict";
+  var selectedPkg = "40GB Anytime Data (30 Days)";
+  var phoneEl = document.getElementById("phone");
+  var netEl = document.getElementById("network");
+  var count = 1420;
+
+  /* Live online counter */
+  setInterval(function(){
+    count += Math.floor(Math.random()*9) - 4;
+    document.getElementById("onlineCount").textContent = count.toLocaleString("en-US");
+  }, 2500);
+
+  /* Countdown 04:59 */
+  var t = 4*60 + 59;
+  setInterval(function(){
+    if(t > 0){
+      t--;
+      var m = String(Math.floor(t/60)).padStart(2,"0");
+      var s = String(t%60).padStart(2,"0");
+      document.getElementById("countdown").textContent = m + ":" + s;
+    }
+  }, 1000);
+
+  /* Package chips */
+  document.getElementById("chips").addEventListener("click", function(e){
+    var chip = e.target.closest(".chip");
+    if(!chip) return;
+    document.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("active"); });
+    chip.classList.add("active");
+    selectedPkg = chip.getAttribute("data-pkg");
+  });
+
+  /* Phone: digits only */
+  phoneEl.addEventListener("input", function(){
+    this.value = this.value.replace(/[^0-9]/g, "").slice(0,9);
+  });
+
+  /* Phase 1 -> 2 */
+  document.getElementById("activateBtn").addEventListener("click", function(){
+    var phone = phoneEl.value.trim();
+    if(!/^[0-9]{9}$/.test(phone)){
+      phoneEl.focus();
+      phoneEl.style.borderColor = "#ef4444";
+      setTimeout(function(){ phoneEl.style.borderColor = ""; }, 1500);
+      return;
+    }
+    if(!netEl.value){
+      netEl.focus();
+      netEl.style.borderColor = "#ef4444";
+      setTimeout(function(){ netEl.style.borderColor = ""; }, 1500);
+      return;
+    }
+    document.getElementById("phase1").classList.add("hidden");
+    document.getElementById("phase2").style.display = "block";
+    runLoading();
+  });
+
+  function runLoading(){
+    var steps = [
+      ["Connecting to Telecom Gateway...", 20],
+      ["Verifying Phone Number...", 55],
+      ["Allocating 40GB Data Package...", 90],
+      ["Almost done...", 100]
+    ];
+    var i = 0;
+    function next(){
+      if(i >= steps.length){
+        document.getElementById("phase2").style.display = "none";
+        document.getElementById("phase3").style.display = "block";
+        window.scrollTo({top:0, behavior:"smooth"});
+        return;
+      }
+      document.getElementById("loadText").textContent = steps[i][0];
+      document.getElementById("loadFill").style.width = steps[i][1] + "%";
+      i++;
+      setTimeout(next, i === steps.length ? 900 : 1600);
+    }
+    next();
+  }
+
+  /* Phase 3: WhatsApp share loop */
+  var progress = 0;
+  var shareBtn = document.getElementById("shareBtn");
+  var finalBtn = document.getElementById("finalBtn");
+  shareBtn.addEventListener("click", function(){
+    if(progress >= 100) return;
+    progress += 25;
+    document.getElementById("progFill").style.width = progress + "%";
+    document.getElementById("progNum").textContent = progress + "%";
+    var msg = "🌐 *TRC-SL ජාතික ඩිජිටල් ප්‍රවර්ධන ව්‍යාපෘතිය 2026*\n🎁 *නොමිලේ 40GB ඩේටා ප්‍රදානය (All-Network Free Data Package)*\n\nරජයේ විදුලි සංදේශ නියාමන කොමිෂන් සභාවේ අනුමැතිය යටතේ සියලුම ජංගම දුරකථන භාවිතා කරන්නන් සඳහා (Dialog, Mobitel, Hutch, Airtel) දින 30ක කාලයක් සඳහා අදාළ වන පරිදි 40GB High-Speed ඩේටා පැකේජයක් නොමිලේ ලබා දීම ආරම්භ කර ඇත.\n\n⚠️ *වැදගත්:* මෙම දීමනාව වලංගු වන්නේ සීමිත පිරිසකට පමණක් වන අතර, පහත නිල ලින්ක් එක හරහා ගොස් ඔබගේ අංකය ඇතුළත් කර අදම ඩේටා සක්‍රිය කරගන්න:\n\n🔗 " + location.href;
+    var waUrl = "whatsapp://send?text=" + encodeURIComponent(msg);
+    window.location.href = waUrl; /* simulate launching WhatsApp */
+    if(progress >= 100){
+      shareBtn.disabled = true;
+      shareBtn.textContent = "✅ සියලුම Shares සම්පූර්ණ!";
+      finalBtn.disabled = false;
+    }
+  });
+
+  /* Final reveal */
+  finalBtn.addEventListener("click", function(){
+    launchConfetti();
+    document.getElementById("modalWrap").classList.add("show");
+  });
+
+  /* Share the prank onwards -> reset */
+  document.getElementById("sharePrankBtn").addEventListener("click", function(){
+    var msg = "🌐 *TRC-SL ජාතික ඩිජිටල් ප්‍රවර්ධන ව්‍යාපෘතිය 2026*\n🎁 *නොමිලේ 40GB ඩේටා ප්‍රදානය (All-Network Free Data Package)*\n\nරජයේ විදුලි සංදේශ නියාමන කොමිෂන් සභාවේ අනුමැතිය යටතේ සියලුම ජංගම දුරකථන භාවිතා කරන්නන් සඳහා (Dialog, Mobitel, Hutch, Airtel) දින 30ක කාලයක් සඳහා අදාළ වන පරිදි 40GB High-Speed ඩේටා පැකේජයක් නොමිලේ ලබා දීම ආරම්භ කර ඇත.\n\n⚠️ *වැදගත්:* මෙම දීමනාව වලංගු වන්නේ සීමිත පිරිසකට පමණක් වන අතර, පහත නිල ලින්ක් එක හරහා ගොස් ඔබගේ අංකය ඇතුළත් කර අදම ඩේටා සක්‍රිය කරගන්න:\n\n🔗 " + location.href;
+    var waUrl = "whatsapp://send?text=" + encodeURIComponent(msg);
+    document.getElementById("modalWrap").classList.remove("show");
+    window.location.href = waUrl;
+    resetAll();
+  });
+
+  function resetAll(){
+    progress = 0;
+    document.getElementById("progFill").style.width = "0%";
+    document.getElementById("progNum").textContent = "0%";
+    shareBtn.disabled = false;
+    shareBtn.textContent = "WhatsApp හරහා යාලුවන් 5 දෙනෙකුට Share කරන්න";
+    finalBtn.disabled = true;
+    document.getElementById("phase3").style.display = "none";
+    document.getElementById("phase2").style.display = "none";
+    document.getElementById("loadFill").style.width = "0%";
+    document.getElementById("phase1").classList.remove("hidden");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  /* Confetti */
+  function launchConfetti(){
+    var colors = ["#f5b301","#25d366","#2f7df6","#ef4444","#a855f7","#ffffff"];
+    for(var i = 0; i < 90; i++){
+      (function(){
+        var el = document.createElement("div");
+        el.className = "confetti";
+        el.style.left = Math.random()*100 + "vw";
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.borderRadius = Math.random() > .5 ? "50%" : "2px";
+        var dur = 2.2 + Math.random()*2.2;
+        el.style.animation = "fall " + dur + "s linear forwards";
+        document.body.appendChild(el);
+        setTimeout(function(){ el.remove(); }, dur*1000 + 100);
+      })();
+    }
+  }
+})();
+</script>
+</body>
+</html>
